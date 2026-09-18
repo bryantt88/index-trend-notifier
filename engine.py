@@ -240,7 +240,15 @@ class NotifierEngine:
     # ------------------------------------------------------------------ RUN
     def run(self, notify: bool = True):
         try:
-            self._ctx = self._open_feed()          # needed even while closed (calendar)
+            # Establish the first connection, retrying until OpenD answers. At
+            # boot the bot and OpenD start together, so OpenD may not be up yet;
+            # we wait for it rather than exiting and leaning on a service restart.
+            while self._ctx is None:
+                try:
+                    self._ctx = self._open_feed()  # needed even while closed (calendar)
+                except Exception as e:
+                    self._log(f"[futu] waiting for OpenD (retry in 15s): {e}")
+                    time.sleep(15)
 
             while True:
                 now = self.now()
