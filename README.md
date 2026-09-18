@@ -18,7 +18,7 @@ prediction (see [Disclaimer](#disclaimer)).
 - **Session- & calendar-aware** — uses the exchange trading calendar per market (HK / US) so
   holidays and half-days are handled; sleeps through lunch, overnight and weekends, drops idle
   sockets and rebuilds stale connections. The HSI night session that crosses midnight
-  (17:15 → 03:00) is handled explicitly.
+  (17:00 → 03:00) is handled explicitly.
 - **Config over code** — add or remove an instrument by editing one declarative entry; the engine
   never changes.
 - **No secrets in source** — the Telegram token and chat ids are read from the environment.
@@ -27,7 +27,7 @@ prediction (see [Disclaimer](#disclaimer)).
 
 | Name | Code | Sessions (local) |
 |---|---|---|
-| HSI Futures | `HK.HSImain` | 09:15–12:00, 13:00–16:30, night 17:15–03:00 |
+| HSI Futures | `HK.HSImain` | 09:15–12:00, 13:00–16:30, night 17:00–03:00 |
 | SPY (S&P 500) | `US.SPY` | 09:30–16:00 ET |
 | QQQ (Nasdaq 100) | `US.QQQ` | 09:30–16:00 ET |
 

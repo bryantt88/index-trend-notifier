@@ -60,7 +60,7 @@ class Session:
     One continuous trading window as local wall-clock times.
 
     If `end` <= `start` the window crosses midnight into the next calendar day
-    (e.g. the HSI-futures night session 17:15 -> 03:00).
+    (e.g. the HSI-futures night session 17:00 -> 03:00).
 
     `phase` gates the window on half-days: on a MORNING half-day only 'morning'
     windows run; the afternoon and night windows are dropped. 'full' always runs
@@ -90,7 +90,7 @@ class Instrument:
 # ----------------------------------------------------------------------------
 INSTRUMENTS = [
     # HSI futures, main-contract continuous. Day + night sessions.
-    # HK futures hours: 09:15-12:00, 13:00-16:30, night 17:15-03:00 (T+1).
+    # HK futures hours: 09:15-12:00, 13:00-16:30, night 17:00-03:00 (T+1).
     Instrument(
         name="HSI Futures",
         code="HK.HSImain",
@@ -98,7 +98,7 @@ INSTRUMENTS = [
         sessions=(
             Session(dt.time(9, 15), dt.time(12, 0), "morning"),
             Session(dt.time(13, 0), dt.time(16, 30), "afternoon"),
-            Session(dt.time(17, 15), dt.time(3, 0), "night"),   # crosses midnight
+            Session(dt.time(17, 0), dt.time(3, 0), "night"),   # crosses midnight
         ),
         calendar_market=TradeDateMarket.HK,
     ),
